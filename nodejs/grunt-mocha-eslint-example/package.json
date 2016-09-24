@@ -8,9 +8,11 @@
   },
   
   "devDependencies": {
+    "grunt": "~1.0.1",
     "chai": "3.5.0",
     "mocha": "3.0.2",
     "grunt-simple-mocha": "0.4.1",
-    "grunt-eslint":"19.0.0"
+    "grunt-eslint":"19.0.0",
+    "grunt-contrib-watch":"1.0.0"
   }  
 }

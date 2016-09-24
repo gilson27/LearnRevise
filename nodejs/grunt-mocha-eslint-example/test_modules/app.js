@@ -12,10 +12,10 @@ var add = require("./add/add");
 */
 
 var startApp = function() {
-	var x = 255;
+	var x = 788;
 	var y = 789;
-	var z = add.add(x,y);
+	var z = add.add(x, y);
 	console.log("Result of x + y = ", z);
-}
+};
 
 module.exports.start = startApp;
