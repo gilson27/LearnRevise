@@ -1,0 +1,12 @@
+{
+  "name": "power",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "grunt test"
+  },
+  "gypfile": true,
+  "dependencies": {
+    "nan": "^2.4.0"
+  }
+}

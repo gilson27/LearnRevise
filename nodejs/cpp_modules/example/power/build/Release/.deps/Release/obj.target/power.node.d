@@ -1,0 +1,1 @@
+cmd_Release/obj.target/power.node := g++ -shared -pthread -rdynamic -m32  -Wl,-soname=power.node -o Release/obj.target/power.node -Wl,--start-group Release/obj.target/power/src/power.o -Wl,--end-group 
