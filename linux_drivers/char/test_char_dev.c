@@ -101,24 +101,51 @@ static int device_write(struct file *file, char __user *buffer,
   Implements IOCTL calls in the device
 */
 static int device_ioctl(struct inode *inode, struct file *file, .
-                        unsigned int ioctl_num, unsigned long ioctl_param) {
+  unsigned int ioctl_num, unsigned long ioctl_param) {
   int i;
   char *temp,
   char ch;
 
   switch(ioctl_num) {
     case IOCTL_SET_MESSAGE: 
+      /**
+        Receive a pointer to a message(in user space) and set that
+        to be device's message. Get the parameter given by ioctl 
+        by the process
+      */
+      temp = (char *)ioctl_param;
 
+      /**
+        Find the length of the message
+      */
+      get_user(ch, temp);
+      for(i=0; ch&& i<BUF_LEN; i++, temp++){
+        get_user(ch, temp);
+      }
+      device_write(file, (char *)ioctl_param, i, 0);
     break;
     case IOCTL_GET_MESSAGE: 
-
+      /**
+        Give the current message to the calling process-
+        the parameter we got is a pointer, fill it
+      */
+      i = device_read(file, (char *)ioctl_param, 99, 0);
+      /**
+        Put a zero at the end of the buffer,
+        so it will be properly terminated
+      */
+      put_user('\0', (char *)ioctl_param + i);
     break;
     case IOCTL_GET_NTH_BYTE: 
-      
+      /**
+        The ioctel is both input and output
+      */
+      return Message[ioctl_param];
     break;
     default:
-      printk(KERN_ALERT "IOCTL %d not supported", ioctl_num);
+      printk(KERN_WARNING "IOCTL %d not supported", ioctl_num);
   }
+  return 0;
 }
 
 /**
