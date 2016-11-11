@@ -193,3 +193,4 @@ void cleanup_module() {
   unregister_chrdev(MAJOR_NUM, DEVICE_NAME);
 }
 
+MODULE_LICENSE("DUAL BSD/GPL");
