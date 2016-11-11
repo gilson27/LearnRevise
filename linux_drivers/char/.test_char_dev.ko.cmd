@@ -1,0 +1,1 @@
+cmd_/home/gilson/Learning/git/LearnRevise/linux_drivers/char/test_char_dev.ko := ld -r -m elf_i386 -T ./scripts/module-common.lds --build-id  -o /home/gilson/Learning/git/LearnRevise/linux_drivers/char/test_char_dev.ko /home/gilson/Learning/git/LearnRevise/linux_drivers/char/test_char_dev.o /home/gilson/Learning/git/LearnRevise/linux_drivers/char/test_char_dev.mod.o

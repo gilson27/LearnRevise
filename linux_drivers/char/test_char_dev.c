@@ -93,21 +93,21 @@ static int device_write(struct file *file, char __user *buffer,
   for(i=0; i<length && i<BUF_LEN; ++i) {
     get_user(Message[i], buffer+i);
   }
-  Message_Ptr = message;
+  Message_Ptr = Message;
   return i;
 }
 
 /**
   Implements IOCTL calls in the device
 */
-static int device_ioctl(struct inode *inode, struct file *file, .
+static int device_ioctl(struct inode *inode, struct file *file,
   unsigned int ioctl_num, unsigned long ioctl_param) {
   int i;
-  char *temp,
+  char *temp;
   char ch;
 
   switch(ioctl_num) {
-    case IOCTL_SET_MESSAGE: 
+    case IOCTL_SET_MSG: 
       /**
         Receive a pointer to a message(in user space) and set that
         to be device's message. Get the parameter given by ioctl 
@@ -124,7 +124,7 @@ static int device_ioctl(struct inode *inode, struct file *file, .
       }
       device_write(file, (char *)ioctl_param, i, 0);
     break;
-    case IOCTL_GET_MESSAGE: 
+    case IOCTL_GET_MSG: 
       /**
         Give the current message to the calling process-
         the parameter we got is a pointer, fill it
@@ -160,9 +160,9 @@ static int device_ioctl(struct inode *inode, struct file *file, .
 struct file_operations Fops = {
   .read = device_read,
   .write = device_write,
+  .unlocked_ioctl = device_ioctl,
   .open = device_open,
   .release = device_release,
-  .ioctl = device_ioctl
 };
 
 /**
@@ -185,10 +185,11 @@ int init_module() {
   return 0;
 }
 
+/**
+
+*/
 void cleanup_module() {
   int ret_val;
-  ret_val = unregister_chrdev(MAJOR_NUM, DEVICE_NAME);
-  if(ret_val < 0) {
-    printk(KERN_ALERT "Unable to unregister device %d", ret_val);
-  }
+  unregister_chrdev(MAJOR_NUM, DEVICE_NAME);
 }
+
