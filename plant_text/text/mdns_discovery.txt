@@ -1,0 +1,17 @@
+@startuml
+
+title Service Instance Enumeration
+
+actor User
+boundary "DNS SD browser" as GUI
+control "Network" as net
+entity "Printer" as Widget
+
+User -> GUI : Get Printers
+GUI -> net : Query PTR _printer._tcp.local
+net <- Widget : Response PTR myprinter._printer._tcp.local
+GUI -> net : Query SRV, TXT myprinter._printer._tcp.local
+net <- Widget : Response SRV IP Address, Port
+net <- Widget : Response TXT (key,value) pairs
+User <- GUI : Display myprinter
+@enduml

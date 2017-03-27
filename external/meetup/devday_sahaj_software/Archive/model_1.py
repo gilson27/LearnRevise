@@ -15,7 +15,7 @@ valid_dataset,valid_labels = train.next_batch(6220)
 
 
 model = Sequential([
-    Reshape((1, 20, 20), input_shape=(400,)),
+    Reshape((20, 20, 1), input_shape=(400,)),
     Convolution2D(8, 3, 3, input_shape=(1, 20, 20)),
     MaxPooling2D(pool_size=(2, 2)),
     Convolution2D(32, 3, 3),
@@ -28,7 +28,7 @@ model = Sequential([
     # Dense(128),
     Dense(108),
     Dropout(0.3),
-    Dense(62),
+    Dense(62), # 26 alpha + 26 small caps alpha + 10 numbers
     Dropout(0.2),
     Activation('softmax'),
 ])

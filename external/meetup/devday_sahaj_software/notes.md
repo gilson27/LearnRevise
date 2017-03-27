@@ -44,3 +44,19 @@
 
 	1. cs231n.github.io
 	2. colah.github.io
+
+
+## Excercise
+
+1. Translational invariant
+
+2. We have to increase mask size as we go higher level
+
+3. Regularisation and dropout
+
+4. Max pooling
+
+5. Normalize values 
+	Why? To keep them between 1 and -1 so that they dont go out of range during processing
+
+6. Activation functions:  relu, softmax
