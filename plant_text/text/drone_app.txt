@@ -1,0 +1,31 @@
+@startuml
+
+title Drone Command Center App Use Case
+
+actor "User Interface" as User
+boundary "Command Center App" as GUI
+control "Network" as net
+entity "Drone API" as Widget
+
+User -> net : Get Status of Drones
+net -> GUI : GET /commander/api/drones
+User -> User : Select a drone with state READY
+User -> net : Command to pick up item ID I to deliver to Location L
+net -> GUI : PUT /commander/api/drone/id/pick-up {item_id: IDI, location: L}
+GUI -> Widget : PUT /drone/api/pick-up {item_id: IDI, location: L}
+Widget -> Widget : Change state to ON_PICKUP
+Widget -> GUI : PUT /commander/api/drone/id/status {status: ON_PICKUP}
+Widget -> Widget : Pick up item ID I from warehouse ID W
+Widget -> Widget : Change state to ON_FLIGHT
+Widget -> GUI : PUT /commander/api/drone/id/status {status: ON_FLIGHT}
+Widget -> Widget : Reached at locatioln L
+Widget -> Widget : Change state to REACHED_DESTINATION
+Widget -> GUI : PUT /commander/api/drone/id/status {status: REACHED_DESTINATION}
+Widget -> Widget : Deliver item at locatioln L
+Widget -> Widget : Change state to DELIVERED
+Widget -> GUI : PUT /commander/api/drone/id/status {status: DELIVERED}
+Widget -> Widget : Return to parking
+Widget -> Widget : Change state to READY
+Widget -> GUI : PUT /commander/api/drone/id/status {status: READY}
+User <- GUI : Update status using websocket
+@enduml
