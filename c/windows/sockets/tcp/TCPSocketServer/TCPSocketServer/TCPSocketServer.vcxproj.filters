@@ -18,5 +18,13 @@
     <ClCompile Include="tcp_server_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tcp_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tcp_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
