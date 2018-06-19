@@ -1,0 +1,23 @@
+Given an array A. Find the highest unique element in array A. Unique element means that element should present only once in the array.
+
+Input:
+
+First line of input contains N, size of array A. Next line contains N space separated elements of array A.
+
+Output:
+
+Print highest unique number of array A. If there is no any such element present in array then print -1.
+
+Constraints:
+
+1 ≤ N ≤ 106
+0 ≤ Ai ≤ 109
+
+SAMPLE INPUT 
+5
+9 8 8 9 5
+SAMPLE OUTPUT 
+5
+Explanation
+In array A:
+9 occur two times. 8 occur two times. 5 occur once hence the answer is 5.
